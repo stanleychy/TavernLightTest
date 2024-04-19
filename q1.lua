@@ -16,6 +16,9 @@
 -- 2. Moved the storage value checking into `releaseStorage` to make the function more self-contained, 
 --      improve readability of the function and easier to debug or change in the future
 -- 3. Changed storage checking condition to >= 0, so storage is released whenever there's a positive value
+-- 4. Remove `addEvent` as it really seems unnecessary in the given context
+-- 5. Ideally we don't want to hardcode the storage key here, so I am assuming we added `loggedIn=1000` to the `PlayerStorageKeys`,
+--      as it kind of make sense that we reset this flag value on player logout event.
 local function releaseStorage(player, key)
     if player:getStorageValue(key) >= 0 then
         player:setStorageValue(key, -1)
@@ -23,6 +26,6 @@ local function releaseStorage(player, key)
 end
 
 function onLogout(player)
-    addEvent(releaseStorage, 1000, player, 1000)
+    releaseStorage(player, PlayerStorageKeys.loggedIn)
     return true
 end
