@@ -1,0 +1,10 @@
+Module
+  name: game_click
+  description: A button that jump when clicked
+  author: stanleychy
+  website: https://github.com/stanleychy
+  scripts: [ click ]
+  sandboxed: true
+  @onLoad: init()
+  @onUnload: terminate()
+
